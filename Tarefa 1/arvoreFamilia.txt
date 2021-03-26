@@ -1,0 +1,40 @@
+progenitor(diva, marlice).
+progenitor(jose, marlice).
+progenitor(diva, marlei).
+progenitor(jose, marlei).
+progenitor(nono, claudicir).
+progenitor(nona, claudicir).
+progenitor(marlice, eduardo).
+progenitor(claudicir, eduardo).
+progenitor(marlice, maria).
+progenitor(claudicir, maria).
+progenitor(marlei, raissa).
+progenitor(fabio, raissa).
+
+masculino(eduardo).
+masculino(claudicir).
+masculino(jose).
+masculino(nono).
+masculino(fabio).
+feminino(marlice).
+feminino(maria).
+feminino(diva).
+feminino(nona).
+feminino(marlei).
+feminino(raissa).
+
+diferente(X, Y) :- X \= Y.
+
+descendente(X,Y) :- progenitor(X, Y).
+descendente(X, Z) :- progenitor(X, Y), descendente(Y,Z).
+filha(X,Y) :- feminino(Y), progenitor(X,Y).
+filho(X,Y) :- masculino(Y), progenitor(X, Y).
+irma(X, Y) :- feminino(X), progenitor(Z, X), progenitor(Z, Y), diferente(X, Y).
+irmao(X, Y) :- masculino(X), progenitor(Z, X), progenitor(Z, Y), diferente(X, Y).
+pai(X,Y) :- masculino(X),progenitor(X,Y).
+mae(X, Y) :- feminino(X), progenitor(X, Y).
+avô(X,Y) :- masculino(X), progenitor(X, Z), progenitor(Z, Y).
+avó(X,Y) :- feminino(X), progenitor(X, Z), progenitor(Z, Y).
+tia(X, Y) :- irma(X, Z), progenitor(Z, Y).
+tio(X, Y) :- irmao(X, Z), progenitor(Z, Y).
+prima(X,Y) :- tia(Z, X), progenitor(Z, Y).
